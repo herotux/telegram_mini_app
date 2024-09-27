@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <title>مینی اپ تلگرام</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .user-info {
+            background-color: #f0f0f0;
+            padding: 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>مشخصات کاربری تلگرام</h1>
+    <div class="user-info" id="user-info">
+        در حال بارگذاری اطلاعات...
+    </div>
+
+    <script>
+        // اطلاع میدهیم که اپ آماده است
+        window.Telegram.WebApp.ready();
+
+        // دریافت اطلاعات کاربران
+        const user = window.Telegram.WebApp.initDataUnsafe.user;
+        const userInfoDiv = document.getElementById('user-info');
+
+        // نمایش اطلاعات کاربری
+        if (user) {
+            userInfoDiv.innerHTML = `
+                <p><strong>نام:</strong> ${user.first_name || 'نامی یافت نشد'}</p>
+                <p><strong>نام کاربری:</strong> ${user.username || 'نام کاربری ندارد'}</p>
+                <p><strong>ID:</strong> ${user.id || 'ID پیدا نشد'}</p>
+            `;
+        } else {
+            userInfoDiv.innerHTML = "<p>هیچ اطلاعات کاربری پیدا نشد.</p>";
+        }
+    </script>
+</body>
+</html>
